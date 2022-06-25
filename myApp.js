@@ -1,4 +1,4 @@
-const bodyParser = require('body-parser');
+var bodyParser = require('body-parser');
 let express = require('express');
 let app = express();
 require('dotenv').config();
@@ -15,7 +15,7 @@ app.use(function(req, res, next) {
 
 
 app.use(bodyParser.urlencoded({ extended: false }));
-
+app.use(bodyParser.json());
 
 app.get('/now', function(req, res, next){
     time = new Date().toString()    + ' ' + req.time;
@@ -38,6 +38,12 @@ app.get('/name/', function(req, res){
     ({
         name: `${firstName} ${lastName}`
     });
+});
+
+app.post('/name', function(req, res){
+var firstName = req.body.first;
+var lastName = req.body.last;
+res.json({name: `${firstName} ${lastName}`});
 });
 
 
