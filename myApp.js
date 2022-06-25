@@ -1,6 +1,8 @@
+const bodyParser = require('body-parser');
 let express = require('express');
 let app = express();
 require('dotenv').config();
+
 
 console.log("Hello world");
 
@@ -10,6 +12,10 @@ app.use(function(req, res, next) {
     console.log(req.method + ' ' + req.path + ' - ' + req.ip);
     next();
 });
+
+
+app.use(bodyParser.urlencoded({ extended: false }));
+
 
 app.get('/now', function(req, res, next){
     time = new Date().toString()    + ' ' + req.time;
@@ -30,7 +36,7 @@ app.get('/name/', function(req, res){
     var lastName = req.query.last;
     res.json
     ({
-        name: '${firstName} ${lastName}'
+        name: `${firstName} ${lastName}`
     });
 });
 
