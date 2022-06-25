@@ -11,6 +11,15 @@ app.use(function(req, res, next) {
     next();
 });
 
+app.get('/now', function(req, res, next){
+    time = new Date().toString()    + ' ' + req.time;
+    next();
+    },
+    function(req,res){
+    res.json({time: req.time});
+   
+});
+
 
 app.get('/', function(req, res) {
     res.sendFile(__dirname + "/views/index.html");
